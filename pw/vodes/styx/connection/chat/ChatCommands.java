@@ -14,9 +14,7 @@ import org.apache.commons.lang3.StringUtils;
 import pw.vodes.styx.Styx;
 import pw.vodes.styx.core.Core;
 import pw.vodes.styx.core.base.anime.AnimeEP;
-import pw.vodes.styx.core.base.options.OptionManager;
 import pw.vodes.styx.core.base.util.enums.ReloadType;
-import pw.vodes.styx.util.PlayerDL;
 
 public class ChatCommands {
 	

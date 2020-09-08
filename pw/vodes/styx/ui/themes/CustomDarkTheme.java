@@ -1,5 +1,7 @@
 package pw.vodes.styx.ui.themes;
 
+import javax.swing.plaf.BorderUIResource;
+
 import mdlaf.themes.JMarsDarkTheme;
 import mdlaf.themes.MaterialLiteTheme;
 

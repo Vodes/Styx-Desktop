@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import pw.vodes.styx.core.Core;
 import pw.vodes.styx.core.base.Watchable;
 import pw.vodes.styx.core.base.filemanagement.Watched;
+import pw.vodes.styx.core.base.filemanagement.WatchedNew;
 import pw.vodes.styx.ui.sub.WatchableContextMenu;
 
 public class WatchableMouseListener implements java.awt.event.MouseListener {
@@ -32,7 +33,7 @@ public class WatchableMouseListener implements java.awt.event.MouseListener {
 			if (!button.getText().contains("seen")) {
 				button.setText(button.getText().replace(")", ", seen)"));
 			}
-			Watched.save();
+			WatchedNew.save();
 			if (Core.getInstance().getOptionmanager().getBoolean("MPV")) {
 				try {
 					Runtime.getRuntime().exec("taskkill /IM mpv.exe");

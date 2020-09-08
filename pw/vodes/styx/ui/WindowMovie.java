@@ -1,5 +1,6 @@
 package pw.vodes.styx.ui;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -12,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 
+import mdlaf.shadows.DropShadowBorder;
 import pw.vodes.styx.Styx;
 import pw.vodes.styx.core.Core;
 import pw.vodes.styx.core.base.anime.Anime;
@@ -38,6 +40,7 @@ public class WindowMovie {
 				button.addActionListener(new WatchAbleActionListener(m, button));
 				button.addMouseListener(new WatchableMouseListener(m, button));
 				button.setBounds(xCord, yCord, 132, 173);
+				button.setBorder(new DropShadowBorder(Color.black, 1, 2, 0.35F, 1, true, true, true, true));
 				button.setFocusable(false);
 				Styx.getInstance().picloadqueue.queue.add(new ButtonPictureCombo(button, m.getCoverURL()));
 //				try {
@@ -60,7 +63,7 @@ public class WindowMovie {
 				
 				panel.add(button);
 			}
-			if(animecount%2 == 0) {
+			if(animecount % 2 == 0) {
 				panel.setPreferredSize(new Dimension(scrollPane.getWidth(), yCord));
 			} else {
 				panel.setPreferredSize(new Dimension(scrollPane.getWidth(), yCord + 176));

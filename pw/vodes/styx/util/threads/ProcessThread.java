@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.Random;
 
 import pw.vodes.styx.util.LogUtil;
+import pw.vodes.styx.util.multios.OutputRedirector;
 
 public class ProcessThread extends Thread {
 	
@@ -19,7 +20,10 @@ public class ProcessThread extends Thread {
 	public void run() {
 		Process p;
 		try {
-			p = processbuilder.redirectOutput(logFile).start();
+			logFile.createNewFile();
+			p = processbuilder.start();
+			new OutputRedirector(p.getInputStream(), logFile).start();
+			new OutputRedirector(p.getErrorStream(), logFile).start();
 		} catch (IOException e) {
 			e.printStackTrace();
 			return;

@@ -182,7 +182,7 @@ public class WindowMain {
 		JToggleButton tglbtnDiscordrpc = new JToggleButton("DiscordRPC");
 		tglbtnDiscordrpc.setToolTipText("Show Styx in your Discord Status");
 		tglbtnDiscordrpc.setHorizontalAlignment(SwingConstants.LEFT);
-		tglbtnDiscordrpc.setBounds(12, 55, 180, 36);
+		tglbtnDiscordrpc.setBounds(12, 50, 267, 31);
 		tglbtnDiscordrpc.setSelected(Core.getInstance().getOptionmanager().getBoolean("DiscordRPC"));
 		tglbtnDiscordrpc.addChangeListener(new ChangeListener() {
 			@Override
@@ -195,7 +195,7 @@ public class WindowMain {
 		JToggleButton tglbtnNewToggleButton = new JToggleButton("Auto-Seen");
 		tglbtnNewToggleButton.setToolTipText("Set episodes seen when starting to watch them");
 		tglbtnNewToggleButton.setHorizontalAlignment(SwingConstants.LEFT);
-		tglbtnNewToggleButton.setBounds(12, 103, 180, 36);
+		tglbtnNewToggleButton.setBounds(12, 93, 267, 31);
 		tglbtnNewToggleButton.setSelected(Core.getInstance().getOptionmanager().getBoolean("Auto-Seen"));
 		tglbtnNewToggleButton.addChangeListener(new ChangeListener() {
 			@Override
@@ -208,7 +208,7 @@ public class WindowMain {
 		JToggleButton tglbtnNewToggleButton_1 = new JToggleButton("Notification Sound");
 		tglbtnNewToggleButton_1.setToolTipText("Get notified when someone sends a message");
 		tglbtnNewToggleButton_1.setHorizontalAlignment(SwingConstants.LEFT);
-		tglbtnNewToggleButton_1.setBounds(12, 151, 180, 36);
+		tglbtnNewToggleButton_1.setBounds(12, 137, 267, 31);
 		tglbtnNewToggleButton_1.setSelected(Core.getInstance().getOptionmanager().getBoolean("Notification-Sound"));
 		tglbtnNewToggleButton_1.addChangeListener(new ChangeListener() {
 			@Override
@@ -221,7 +221,7 @@ public class WindowMain {
 		JToggleButton tglbtnJoinNotification = new JToggleButton("Join Notification");
 		tglbtnJoinNotification.setToolTipText("Get notified when someone joins");
 		tglbtnJoinNotification.setHorizontalAlignment(SwingConstants.LEFT);
-		tglbtnJoinNotification.setBounds(12, 199, 180, 36);
+		tglbtnJoinNotification.setBounds(12, 179, 267, 31);
 		tglbtnJoinNotification.setSelected(Core.getInstance().getOptionmanager().getBoolean("Notification-Sound-Action"));
 		tglbtnJoinNotification.addChangeListener(new ChangeListener() {
 			@Override
@@ -230,19 +230,6 @@ public class WindowMain {
 			}
 		});
 		desktopPane_9.add(tglbtnJoinNotification);
-		
-		JToggleButton tglbtnMpv = new JToggleButton("MPV instead of VLC");
-		tglbtnMpv.setToolTipText("a better (imo) and more lightweight player");
-		tglbtnMpv.setHorizontalAlignment(SwingConstants.LEFT);
-		tglbtnMpv.setBounds(12, 247, 180, 36);
-		tglbtnMpv.setSelected(Core.getInstance().getOptionmanager().getBoolean("MPV"));
-		tglbtnMpv.addChangeListener(new ChangeListener() {
-			@Override
-			public void stateChanged(ChangeEvent e) {
-				Core.getInstance().getOptionmanager().setOptionValue("MPV", tglbtnMpv.isSelected());
-			}
-		});
-		desktopPane_9.add(tglbtnMpv);
 		
 		textField_1 = new JTextField();
 		textField_1.setEditable(false);
@@ -267,7 +254,7 @@ public class WindowMain {
 		desktopPane_9.add(btnSelect);
 		
 		JLabel lblDownloadPath = new JLabel("Download Path");
-		lblDownloadPath.setBounds(12, 295, 325, 21);
+		lblDownloadPath.setBounds(12, 297, 325, 21);
 		desktopPane_9.add(lblDownloadPath);
 		
 		JButton btnOpenLogs = new JButton("Open Logs");
@@ -299,6 +286,32 @@ public class WindowMain {
 		});
 		btnOpen.setBounds(349, 287, 73, 37);
 		desktopPane_9.add(btnOpen);
+		
+		JToggleButton tglbtnPreferGermanSubs = new JToggleButton("Prefer German Subs (if available)");
+		tglbtnPreferGermanSubs.setHorizontalAlignment(SwingConstants.LEFT);
+		tglbtnPreferGermanSubs.setFont(new Font("Verdana", Font.PLAIN, 13));
+		tglbtnPreferGermanSubs.setBounds(12, 221, 267, 31);
+		tglbtnPreferGermanSubs.setSelected(Core.getInstance().getOptionmanager().getBoolean("Prefer-German"));
+		tglbtnPreferGermanSubs.addChangeListener(new ChangeListener() {
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				Core.getInstance().getOptionmanager().setOptionValue("Prefer-German", tglbtnPreferGermanSubs.isSelected());
+			}
+		});
+		desktopPane_9.add(tglbtnPreferGermanSubs);
+		
+		JToggleButton tglbtnPreferEnglishDub = new JToggleButton("Prefer English Dub (if available)");
+		tglbtnPreferEnglishDub.setHorizontalAlignment(SwingConstants.LEFT);
+		tglbtnPreferEnglishDub.setFont(new Font("Verdana", Font.PLAIN, 13));
+		tglbtnPreferEnglishDub.setBounds(12, 263, 267, 31);
+		tglbtnPreferEnglishDub.setSelected(Core.getInstance().getOptionmanager().getBoolean("Prefer-Dub"));
+		tglbtnPreferEnglishDub.addChangeListener(new ChangeListener() {
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				Core.getInstance().getOptionmanager().setOptionValue("Prefer-Dub", tglbtnPreferEnglishDub.isSelected());
+			}
+		});
+		desktopPane_9.add(tglbtnPreferEnglishDub);
 		//TODO: End
 		
 		JDesktopPane desktopPane_2 = new JDesktopPane();

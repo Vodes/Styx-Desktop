@@ -1,5 +1,6 @@
 package pw.vodes.styx.ui;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
@@ -11,12 +12,14 @@ import java.awt.image.BufferedImage;
 import java.net.URL;
 
 import javax.imageio.ImageIO;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 
+import mdlaf.shadows.DropShadowBorder;
 import pw.vodes.styx.Styx;
 import pw.vodes.styx.core.Core;
 import pw.vodes.styx.core.base.anime.Anime;
@@ -93,6 +96,7 @@ public class WindowAnime {
 					button.setBounds(xCord, yCord, 132, 173);
 				}
 				button.setFocusable(false);
+				button.setBorder(new DropShadowBorder(Color.black, 1, 2, 0.5F, 1, true, true, true, true));
 				Styx.getInstance().picloadqueue.queue.add(new ButtonPictureCombo(button, a.getCoverURL()));
 				buttoncount++;
 				xCord += allowedButtonsInRow == 3 ? 95 : 145;

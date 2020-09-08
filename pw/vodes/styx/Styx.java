@@ -22,8 +22,8 @@ import pw.vodes.styx.ui.WindowMain;
 import pw.vodes.styx.ui.loading.PictureLoadingQueue;
 import pw.vodes.styx.ui.updating.DownloadingUpdateThread;
 import pw.vodes.styx.util.FileImporting;
-import pw.vodes.styx.util.PlayerDL;
 import pw.vodes.styx.util.ThemeUtil;
+import pw.vodes.styx.util.mpv.MpvDownloader;
 import pw.vodes.styx.util.multios.CommandLineUtil;
 import pw.vodes.styx.util.multios.OS;
 import pw.vodes.styx.util.threads.ChatStartThread;
@@ -67,7 +67,7 @@ public class Styx {
 			unsafe = !isLatestVersion();
 		}
 		if(CommandLineUtil.getOS() == OS.Windows) {
-			PlayerDL.checkDownloadedPlayers();
+			MpvDownloader.check();
 		}
 		deleteOldVersions();
 		new DownloadingUpdateThread().start();
@@ -93,6 +93,8 @@ public class Styx {
 		Core.getInstance().getOptionmanager().options.add(new OptionBoolean("Notification-Sound-Action", true));
 		Core.getInstance().getOptionmanager().options.add(new OptionBoolean("Auto-Seen", true));
 		Core.getInstance().getOptionmanager().options.add(new OptionBoolean("MPV", true));
+		Core.getInstance().getOptionmanager().options.add(new OptionBoolean("Prefer-German", false));
+		Core.getInstance().getOptionmanager().options.add(new OptionBoolean("Prefer-Dub", false));
 		Core.getInstance().getOptionmanager().options.add(new OptionString("Download-Path", Core.getInstance().getFilemanager().downloadDirectory.getAbsolutePath()));
 		Core.getInstance().getOptionmanager().options.add(new OptionStringArray("Theme", "Oceanic", new String[] {"White", "Dark", "Oceanic"}));
 	}

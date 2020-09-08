@@ -28,6 +28,7 @@ import javax.swing.text.JTextComponent;
 
 import org.apache.commons.lang3.StringUtils;
 
+import mdlaf.shadows.DropShadowBorder;
 import pw.vodes.styx.Styx;
 import pw.vodes.styx.core.base.anime.Anime;
 import pw.vodes.styx.core.base.anime.AnimeEP;
@@ -72,29 +73,20 @@ public class WindowEpisodes extends JInternalFrame {
 		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		this.setRootPaneCheckingEnabled(false);
 		((BasicInternalFrameUI)this.getUI()).setNorthPane(null);
-		this.setBorder(null);
+//		this.setBorder(null);
 		getContentPane().setLayout(null);
-		scrollPane.setBounds(0, 67, 300, 210);
-		getRootPane().setBorder(BorderFactory.createBevelBorder(0));
+		scrollPane.setBounds(-1, 67, 300, 210);
+		this.setBorder(new DropShadowBorder(Color.black, 1, 2, 0.5F, 1, true, true, true, true));
 		getContentPane().add(scrollPane);
 		
 		JPanel panel = new JPanel();
 		scrollPane.setViewportView(panel);
 		panel.setLayout(null);
 		
-//		JButton btnNewButton = new JButton("New button");
-//		btnNewButton.setFont(new Font("Verdana", Font.PLAIN, 13));
-//		btnNewButton.setBounds(0, 0, 300, 25);
-//		panel.add(btnNewButton);
-//		
-//		JButton btnNewButton_1 = new JButton("New button");
-//		btnNewButton_1.setFont(new Font("Verdana", Font.PLAIN, 13));
-//		btnNewButton_1.setBounds(0, 28, 300, 25);
-//		panel.add(btnNewButton_1);
 		int height = 0;
 		for(AnimeEP ep : anime.getEPs()) {
 			JButton button = new JButton("EP: " + ep.getEP() + " (" + ep.getDate() + (ep.hasBeenWatched() ? ", seen)" : ")"));
-			button.setBounds(5, height, 285, 25);
+			button.setBounds(0, height, 285, 25);
 			button.setFocusable(false);
 			button.addActionListener(new WatchAbleActionListener(ep, button));
 			button.addMouseListener(new WatchableMouseListener(ep, button));
@@ -107,7 +99,7 @@ public class WindowEpisodes extends JInternalFrame {
 		scrollPane.getVerticalScrollBar().setPreferredSize(new Dimension(3, 0));
 		
 		JLabel lblNewLabel = new JLabel(anime.getName());
-		lblNewLabel.setBounds(0, 0, 300, 22);
+		lblNewLabel.setBounds(-4, 0, 300, 22);
 		lblNewLabel.setFont(new Font("Verdana", Font.BOLD, 12));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		getContentPane().add(lblNewLabel);
@@ -120,7 +112,7 @@ public class WindowEpisodes extends JInternalFrame {
 			}
 		});
 		btnX.setFont(new Font("Verdana", Font.PLAIN, 9));
-		btnX.setBounds(254, 33, 40, 23);
+		btnX.setBounds(242, 34, 40, 23);
 		getContentPane().add(btnX);
 		
 		JButton btnMal = new JButton("AL");
@@ -137,13 +129,13 @@ public class WindowEpisodes extends JInternalFrame {
 			}
 		});
 		btnMal.setFont(new Font("Verdana", Font.BOLD, 14));
-		btnMal.setBounds(0, 33, 89, 23);
+		btnMal.setBounds(0, 34, 78, 23);
 		getContentPane().add(btnMal);
 		
 		JButton btnSetSeen = new JButton("Set Seen");
 		btnSetSeen.setFont(new Font("Verdana", Font.BOLD, 14));
 		btnSetSeen.setFocusable(false);
-		btnSetSeen.setBounds(90, 33, 106, 23);
+		btnSetSeen.setBounds(79, 34, 106, 23);
 		btnSetSeen.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -157,7 +149,7 @@ public class WindowEpisodes extends JInternalFrame {
 		
 		JButton btnDl = new JButton("DL");
 		btnDl.setFont(new Font("Verdana", Font.BOLD, 14));
-		btnDl.setBounds(197, 33, 53, 23);
+		btnDl.setBounds(186, 34, 53, 23);
 		btnDl.setFocusable(false);
 		btnDl.addActionListener(new ActionListener() {
 			@Override

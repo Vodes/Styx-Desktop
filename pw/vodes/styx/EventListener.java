@@ -1,20 +1,14 @@
 package pw.vodes.styx;
 
-import java.io.IOException;
-
 import javax.swing.JOptionPane;
 
 import pw.vodes.styx.connection.discord.DiscordIntegration;
-import pw.vodes.styx.core.Core;
-import pw.vodes.styx.core.base.anime.AnimeEP;
 import pw.vodes.styx.core.base.text.TextType;
 import pw.vodes.styx.core.event.EventTarget;
-import pw.vodes.styx.core.events.EventHandleOutput;
 import pw.vodes.styx.core.events.EventPlayFile;
 import pw.vodes.styx.core.events.EventPlayURL;
 import pw.vodes.styx.core.events.EventRequestUIReload;
 import pw.vodes.styx.core.events.EventTextCreated;
-import pw.vodes.styx.util.PlayerDL;
 import pw.vodes.styx.util.multios.PlayerUtil;
 import pw.vodes.styx.util.threads.PlayingThread;
 
