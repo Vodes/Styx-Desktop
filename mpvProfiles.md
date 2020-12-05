@@ -1,5 +1,5 @@
 # Overall explanation
-### OpenGL and Vulkan
+### Op(en)GL and V(ulkan)
 Just choose whatever works (or if both work, use vulkan, which usually performs better)
 
 # Profiles
