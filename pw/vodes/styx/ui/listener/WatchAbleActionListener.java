@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import pw.vodes.styx.core.Core;
 import pw.vodes.styx.core.base.Watchable;
 import pw.vodes.styx.core.base.filemanagement.Watched;
+import pw.vodes.styx.core.sync.Sync;
 
 public class WatchAbleActionListener implements ActionListener {
 	
@@ -26,8 +27,11 @@ public class WatchAbleActionListener implements ActionListener {
 			w.setWatched(true);
 			if (!button.getText().contains("seen")) {
 				button.setText(button.getText().replace(")", ", seen)"));
+				if(button.getText().length() > 42) {
+					button.setToolTipText(button.getText());
+				}
 			}
-			Watched.save();
+			Sync.setWatched(w);
 		}
 	}
 

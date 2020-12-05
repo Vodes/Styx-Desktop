@@ -11,6 +11,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -108,7 +109,7 @@ public class WindowMain {
 	public void initialize() {
 		frame = new JFrame();
 		frame.setResizable(false);
-		frame.setBounds(100, 100, 650, 490);
+		frame.setBounds(100, 100, 650, 494);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/res/Styx.png")));
@@ -116,7 +117,7 @@ public class WindowMain {
 		
 		JDesktopPane desktopPane = new JDesktopPane();
 		desktopPane.setBackground(ThemeUtil.color);
-		desktopPane.setBounds(0, 0, 644, 471);
+		desktopPane.setBounds(0, 0, 644, 480);
 		frame.getContentPane().add(desktopPane);
 		desktopPane.setLayout(null);
 		
@@ -182,7 +183,7 @@ public class WindowMain {
 		JToggleButton tglbtnDiscordrpc = new JToggleButton("DiscordRPC");
 		tglbtnDiscordrpc.setToolTipText("Show Styx in your Discord Status");
 		tglbtnDiscordrpc.setHorizontalAlignment(SwingConstants.LEFT);
-		tglbtnDiscordrpc.setBounds(12, 50, 267, 31);
+		tglbtnDiscordrpc.setBounds(12, 50, 132, 31);
 		tglbtnDiscordrpc.setSelected(Core.getInstance().getOptionmanager().getBoolean("DiscordRPC"));
 		tglbtnDiscordrpc.addChangeListener(new ChangeListener() {
 			@Override
@@ -195,7 +196,7 @@ public class WindowMain {
 		JToggleButton tglbtnNewToggleButton = new JToggleButton("Auto-Seen");
 		tglbtnNewToggleButton.setToolTipText("Set episodes seen when starting to watch them");
 		tglbtnNewToggleButton.setHorizontalAlignment(SwingConstants.LEFT);
-		tglbtnNewToggleButton.setBounds(12, 93, 267, 31);
+		tglbtnNewToggleButton.setBounds(12, 93, 132, 31);
 		tglbtnNewToggleButton.setSelected(Core.getInstance().getOptionmanager().getBoolean("Auto-Seen"));
 		tglbtnNewToggleButton.addChangeListener(new ChangeListener() {
 			@Override
@@ -208,7 +209,7 @@ public class WindowMain {
 		JToggleButton tglbtnNewToggleButton_1 = new JToggleButton("Notification Sound");
 		tglbtnNewToggleButton_1.setToolTipText("Get notified when someone sends a message");
 		tglbtnNewToggleButton_1.setHorizontalAlignment(SwingConstants.LEFT);
-		tglbtnNewToggleButton_1.setBounds(12, 137, 267, 31);
+		tglbtnNewToggleButton_1.setBounds(12, 137, 169, 31);
 		tglbtnNewToggleButton_1.setSelected(Core.getInstance().getOptionmanager().getBoolean("Notification-Sound"));
 		tglbtnNewToggleButton_1.addChangeListener(new ChangeListener() {
 			@Override
@@ -221,7 +222,7 @@ public class WindowMain {
 		JToggleButton tglbtnJoinNotification = new JToggleButton("Join Notification");
 		tglbtnJoinNotification.setToolTipText("Get notified when someone joins");
 		tglbtnJoinNotification.setHorizontalAlignment(SwingConstants.LEFT);
-		tglbtnJoinNotification.setBounds(12, 179, 267, 31);
+		tglbtnJoinNotification.setBounds(12, 179, 169, 31);
 		tglbtnJoinNotification.setSelected(Core.getInstance().getOptionmanager().getBoolean("Notification-Sound-Action"));
 		tglbtnJoinNotification.addChangeListener(new ChangeListener() {
 			@Override
@@ -254,7 +255,7 @@ public class WindowMain {
 		desktopPane_9.add(btnSelect);
 		
 		JLabel lblDownloadPath = new JLabel("Download Path");
-		lblDownloadPath.setBounds(12, 297, 325, 21);
+		lblDownloadPath.setBounds(12, 297, 325, 26);
 		desktopPane_9.add(lblDownloadPath);
 		
 		JButton btnOpenLogs = new JButton("Open Logs");
@@ -312,6 +313,37 @@ public class WindowMain {
 			}
 		});
 		desktopPane_9.add(tglbtnPreferEnglishDub);
+		
+		JLabel lblMpvProfile = new JLabel("mpv Profile");
+		lblMpvProfile.setFont(new Font("Verdana", Font.PLAIN, 13));
+		lblMpvProfile.setHorizontalAlignment(SwingConstants.LEFT);
+		lblMpvProfile.setBounds(253, 69, 115, 21);
+		desktopPane_9.add(lblMpvProfile);
+		
+		JComboBox comboBox_1 = new JComboBox(new String[] {"No-Filtering-OGL", "No-Filtering-V", "Deband-OGL", "Deband-V", "Upscale-OGL", "Upscale-V", "Upscale-Medium-OGL", "Upscale-Medium-V", "Upscale-Heavy-OGL", "Upscale-Heavy-V"});
+		comboBox_1.setBounds(253, 92, 169, 31);
+		comboBox_1.setSelectedIndex(parseIndexProfile(Core.getInstance().getOptionmanager().getString("mpv-Profile")));
+		comboBox_1.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Core.getInstance().getOptionmanager().setOptionValue("mpv-Profile", parseIndexProfile2(comboBox_1.getSelectedIndex()));
+			}
+		});
+		desktopPane_9.add(comboBox_1);
+		
+		JButton button = new JButton("?");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					Desktop.getDesktop().browse(new URI("https://github.com/Vodes/Styx-Desktop/blob/master/mpvProfiles.md"));
+				} catch(Exception ex) {
+					ex.printStackTrace();
+				}
+			}
+		});
+		button.setFont(new Font("Verdana", Font.PLAIN, 12));
+		button.setBounds(385, 70, 37, 21);
+		desktopPane_9.add(button);
 		//TODO: End
 		
 		JDesktopPane desktopPane_2 = new JDesktopPane();
@@ -443,6 +475,55 @@ public class WindowMain {
 			return "Dark";
 		}
 		return "Oceanic";
+	}
+	
+	public static int parseIndexProfile(String s) {
+		if(s.equalsIgnoreCase("No-Filtering-OGL")) {
+			return 0;
+		} else if(s.equalsIgnoreCase("No-Filtering-V")) {
+			return 1;
+		} else if(s.equalsIgnoreCase("Deband-OGL")) {
+			return 2;
+		} else if(s.equalsIgnoreCase("Deband-V")) {
+			return 3;
+		} else if(s.equalsIgnoreCase("Upscale-OGL")) {
+			return 4;
+		} else if(s.equalsIgnoreCase("Upscale-V")) {
+			return 5;
+		} else if(s.equalsIgnoreCase("Upscale-Medium-OGL")) {
+			return 6;
+		} else if(s.equalsIgnoreCase("Upscale-Medium-V")) {
+			return 7;
+		} else if(s.equalsIgnoreCase("Upscale-Heavy-OGL")) {
+			return 8;
+		} else if(s.equalsIgnoreCase("Upscale-Heavy-V")) {
+			return 9;
+		}
+		return 0;
+	}
+	public static String parseIndexProfile2(int i) {
+		if(i == 0) {
+			return "No-Filtering-OGL";
+		} else if(i == 1) {
+			return "No-Filtering-V";
+		} else if(i == 2) {
+			return "Deband-OGL";
+		} else if(i == 3) {
+			return "Deband-V";
+		} else if(i == 4) {
+			return "Upscale-OGL";
+		} else if(i == 5) {
+			return "Upscale-V";
+		} else if(i == 6) {
+			return "Upscale-Medium-OGL";
+		} else if(i == 7) {
+			return "Upscale-Medium-V";
+		} else if(i == 8) {
+			return "Upscale-Heavy-OGL";
+		} else if(i == 9) {
+			return "Upscale-Heavy-V";
+		}
+		return "No-Filtering-OGL";
 	}
 	
 	public void addtoChat(String s) {

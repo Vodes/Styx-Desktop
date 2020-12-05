@@ -37,7 +37,11 @@ public class WindowAnime {
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
 		for(AnimeEP recents : Core.getInstance().getSeasonManager().getRecentEPs()) {
-			JButton btn = new JButton(recents.getButtonString(false).replace("EP: ", "E").replace(".2020", ""));
+			String s = recents.getButtonString(false).replace("EP: ", "E").replace(".2020", "");
+			JButton btn = new JButton(s);
+			if(s.length() > 42) {
+				btn.setToolTipText(s);
+			}
 			btn.setBounds(0, height, 286, 30);
 			btn.setFont(new Font("Verdana", Font.PLAIN, 11));
 			btn.setFocusable(false);

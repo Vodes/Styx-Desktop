@@ -30,9 +30,11 @@ import org.apache.commons.lang3.StringUtils;
 
 import mdlaf.shadows.DropShadowBorder;
 import pw.vodes.styx.Styx;
+import pw.vodes.styx.core.base.Watchable;
 import pw.vodes.styx.core.base.anime.Anime;
 import pw.vodes.styx.core.base.anime.AnimeEP;
 import pw.vodes.styx.core.base.filemanagement.Watched;
+import pw.vodes.styx.core.sync.Sync;
 import pw.vodes.styx.ui.listener.WatchAbleActionListener;
 import pw.vodes.styx.ui.listener.WatchableMouseListener;
 
@@ -59,7 +61,7 @@ public class WindowEpisodes extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public WindowEpisodes(Anime anime) {
-		setBounds(100, 100, 300, 283);
+		setBounds(100, 100, 300, 288);
 		getInputMap(JTextComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "ESC");
 		getActionMap().put("ESC", new AbstractAction() {
 			
@@ -139,10 +141,16 @@ public class WindowEpisodes extends JInternalFrame {
 		btnSetSeen.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				StringBuilder builder = new StringBuilder("");
+				Watchable sample = null;
 				for(AnimeEP ep : anime.getEPs()) {
-					ep.setWatched(true);
+					builder.append(ep.getEP() + ";");
+					sample = ep;
 				}
-				Watched.save();
+				if(sample != null) {
+					String st = builder.toString();
+					Sync.setWatchedOnline(sample, st.substring(0, st.length() - 1), false);
+				}
 			}
 		});
 		getContentPane().add(btnSetSeen);

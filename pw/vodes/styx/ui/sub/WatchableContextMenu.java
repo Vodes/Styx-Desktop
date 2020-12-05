@@ -21,6 +21,7 @@ import pw.vodes.styx.core.base.filemanagement.Watched;
 import pw.vodes.styx.core.base.movie.Movie;
 import pw.vodes.styx.core.base.movie.MovieLocal;
 import pw.vodes.styx.core.base.util.enums.ReloadType;
+import pw.vodes.styx.core.sync.Sync;
 
 public class WatchableContextMenu extends JPopupMenu {
 	
@@ -33,7 +34,7 @@ public class WatchableContextMenu extends JPopupMenu {
 				if (!button.getText().contains("seen")) {
 					button.setText(button.getText().replace(")", ", seen)"));
 				}
-				Watched.save();
+				Sync.setWatched(w);
 			}
 		});
 		add(setSeen);
@@ -67,20 +68,23 @@ public class WatchableContextMenu extends JPopupMenu {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					try {
-						try {
-							FileUtils.forceDelete(w.getFile());
-						} catch(Exception ex2) {
-							
-						}
-						if(w instanceof AnimeEPLocal) {
-							AnimeEPLocal ep = (AnimeEPLocal) w;
-							Core.getInstance().getLocalManager().getLocalEPs().remove(ep);
-						} else {
-							MovieLocal m = (MovieLocal) w;
-							Core.getInstance().getLocalManager().getLocalMovies().remove(m);
-						}
-						LocalFiles.save();
-						Styx.getInstance().reloadEpisodes(ReloadType.Locals);
+						Thread t = new Thread(() ->  {
+							try {
+								FileUtils.forceDelete(w.getFile());
+							} catch(Exception ex2) {
+								
+							}
+							if(w instanceof AnimeEPLocal) {
+								AnimeEPLocal ep = (AnimeEPLocal) w;
+								Core.getInstance().getLocalManager().getLocalEPs().remove(ep);
+							} else {
+								MovieLocal m = (MovieLocal) w;
+								Core.getInstance().getLocalManager().getLocalMovies().remove(m);
+							}
+							LocalFiles.save();
+							Styx.getInstance().reloadEpisodes(ReloadType.Locals);
+						});
+						t.start();
 					}catch(Exception ex) {
 						ex.printStackTrace();
 					}

@@ -13,6 +13,7 @@ import pw.vodes.styx.core.base.anime.Anime;
 import pw.vodes.styx.core.base.anime.AnimeEP;
 import pw.vodes.styx.core.base.category.season.Season;
 import pw.vodes.styx.core.base.filemanagement.Watched;
+import pw.vodes.styx.core.sync.Sync;
 
 public class FileImporting {
 	
@@ -49,6 +50,7 @@ public class FileImporting {
 				}
 			}
 			Watched.save();
+			Sync.onStartup();
 		}
 		try {
 			FileUtils.deleteDirectory(oldStyxDir);

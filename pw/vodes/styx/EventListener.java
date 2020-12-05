@@ -32,23 +32,6 @@ public class EventListener {
 		} else {
 			JOptionPane.showMessageDialog(Styx.getInstance().window.frame, "You are not running the latest version. Please update by restarting with the Launcher!");
 		}
-//		if (Core.getInstance().getOptionmanager().getBoolean("MPV")) {
-//			try {
-//				Runtime rt = Runtime.getRuntime();
-//				rt.exec("cmd.exe /c start " + PlayerDL.latestDirectory.getAbsolutePath() + "\\mpv.exe \""
-//						+ ev.getFile().getAbsolutePath() + "\"");
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}
-//		} else {
-//			Process process;
-//			try {
-//				process = new ProcessBuilder(PlayerDL.latestDirectory.getAbsolutePath() + "\\vlc.exe",
-//						ev.getFile().getAbsolutePath()).start();
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}
-//		}
 	}
 
 	@EventTarget
@@ -68,20 +51,6 @@ public class EventListener {
 		} else {
 			JOptionPane.showMessageDialog(Styx.getInstance().window.frame, "You are not running the latest version. Please update by restarting with the Launcher!");
 		}
-//		Process process;
-//		if (Core.getInstance().getOptionmanager().getBoolean("MPV")) {
-//			try {
-//				process = new ProcessBuilder(PlayerDL.latestDirectory.getAbsolutePath() + "\\mpv.exe", ev.getURL()).directory(PlayerDL.latestDirectory).start();
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}
-//		} else {
-//			try {
-//				process = new ProcessBuilder(PlayerDL.latestDirectory.getAbsolutePath() + "\\vlc.exe", ev.getURL()).directory(PlayerDL.latestDirectory).start();
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}
-//		}
 
 	}
 
